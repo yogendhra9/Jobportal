@@ -10,16 +10,18 @@ export const register = async (req, res) => {
         .status(400)
         .json({ message: "Please fill in all fields.", success: false });
     }
-    let user = await User.findOne(email);
+    let user = await User.findOne({ email });
     if (user) {
       return res
         .status(400)
         .json({ message: "Email already exists.", success: false });
     }
-    const hashedPassword = await bcrypt.hash(password, 10);
-    await User.create({
+    const hashedPassword = await bcrypt.hashSync(password, 10);
+    console.log(hashedPassword);
+    const lowerCaseEmail = email.toLowerCase();
+    const newUser = await User.create({
       fullName,
-      email,
+      email: lowerCaseEmail,
       phoneNumber,
       password: hashedPassword,
       role,
@@ -35,22 +37,23 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { email, password, role } = req.body;
-    if (!fullName || !password || !role) {
+    if (!email || !password || !role) {
       return res
         .status(400)
         .json({ message: "Please fill in all fields.", success: false });
     }
-    const user = await User.findOne({ email });
+    const lowerCaseEmail = email.toLowerCase();
+    let user = await User.findOne({ email: lowerCaseEmail });
     if (!user) {
       return res.status(400).json({
         message: "Invalid login credentials",
         success: false,
       });
     }
-    const isPasswordMatch = await bycrpt.compare(password, user.password);
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
     if (!isPasswordMatch) {
       return res.status(400).json({
-        message: "Invalid login credentials",
+        message: "Invalid password",
         success: false,
       });
     }
@@ -63,18 +66,23 @@ export const login = async (req, res) => {
     }
     const tokenData = {
       userId: user._id,
-      fullName: user.fullName,
     };
+    console.log(tokenData);
+
     const token = jwt.sign(tokenData, process.env.SECRET_KEY, {
       expiresIn: "1d",
     });
+    console.log(token);
     user = {
       _id: user.id,
-      fullname: user.fullName,
+      email: user.email,
+      fullName: user.fullName,
       phoneNumber: user.phoneNumber,
       role: user.role,
       profile: user.profile,
     };
+    console.log(user);
+
     return res
       .status(200)
       .cookie("token", token, {
@@ -83,7 +91,9 @@ export const login = async (req, res) => {
         sameSite: "strict",
       })
       .json({ message: `Welcome back ${user.fullName}`, user, success: true });
-  } catch {
+  } catch (error) {
+    console.log(error);
+
     return res
       .status(500)
       .json({ message: "Internal Server Error", success: false });
@@ -103,32 +113,34 @@ export const updateProfile = async (req, res) => {
   try {
     const { fullName, email, phoneNumber, password, bio, skills } = req.body;
     const file = req.file;
-    // if (!fullName || !email || !phoneNumber || !password || !skills || !bio) {
-    //   return res
-    //     .status(400)
-    //     .json({ message: "Something is missing", success: false });
-    // }
 
-    const skillsArray = skills.split(",");
+    let skillsArray;
+    if (skills) {
+      skillsArray = skills.split(",");
+    }
     const userId = req.id; // middleware authentication
+    console.log(userId);
+
     let user = await User.findById(userId);
+    console.log(user);
+
     if (!user) {
       return res
         .status(400)
         .json({ message: "user not found", success: false });
     }
     //Updating the profile
-    (user.fullName = fullName),
-      (user.email = email),
-      (user.phoneNumber = phoneNumber),
-      (user.password = password),
-      (user.bio = bio),
-      (user.skills = skillsArray);
+    if (fullName) user.fullName = fullName;
+    if (email) user.email = email;
+    if (phoneNumber) user.phoneNumber = phoneNumber;
+    if (password) user.password = password;
+    if (skills) user.skills = skills;
+    if (bio) user.bio = bio;
     await user.save();
     //resume
     user = {
       _id: user.id,
-      fullname: user.fullName,
+      fullName: user.fullName,
       phoneNumber: user.phoneNumber,
       role: user.role,
       profile: user.profile,
@@ -138,5 +150,6 @@ export const updateProfile = async (req, res) => {
       .json({ message: "Profile updated successfully", user, success: true });
   } catch (error) {
     console.log(error);
+    return res.status(500).json({ message: "Internal server error" });
   }
 };

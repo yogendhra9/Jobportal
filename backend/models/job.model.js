@@ -1,7 +1,6 @@
-import { compare } from "bcryptjs";
 import mongoose from "mongoose";
-import { User } from "./user.model";
-import { application } from "express";
+import { Company } from "./company.model.js";
+
 const jobSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -12,10 +11,14 @@ const jobSchema = new mongoose.Schema({
     required: true,
   },
   requirements: {
-    type: String,
+    type: Array,
     required: true,
   },
   salary: {
+    type: Number,
+    required: true,
+  },
+  experienceLevel: {
     type: Number,
     required: true,
   },
@@ -31,7 +34,7 @@ const jobSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  company: {
+  companyId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Company",
     required: true,
@@ -41,9 +44,6 @@ const jobSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  application: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "application",
-  },
+  applications: [{ type: mongoose.Schema.Types.ObjectId, ref: "Company" }],
 });
 export const Job = mongoose.model("Job", jobSchema);

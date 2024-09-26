@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start-Up Challenges Mind Map</title>
+
+    <!-- jsmind library CSS and JS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/hizzgdev/jsmind/style/jsmind.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/hizzgdev/jsmind/js/jsmind.js"></script>
+
+    <style>
+        /* Custom styles for mind map container */
+        #jsmind_container {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ccc;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Challenges Faced by Start-Ups</h1>
+    <div id="jsmind_container"></div>
+
+    <script>
+        // Define the mind map data in JSON format
+        var mindMapData = {
+            "meta": {
+                "name": "startups_challenges",
+                "author": "Yogi",
+                "version": "1.0"
+            },
+            "format": "node_tree",
+            "data": {
+                "id": "root", "topic": "Challenges for Start-Ups", "children": [
+                    { "id": "funding", "topic": "Funding", "direction": "right", "children": [
+                        { "id": "capital", "topic": "Access to Capital" },
+                        { "id": "cash_flow", "topic": "Cash Flow Management", "direction": "right", "children": [
+                            { "id": "forecasting", "topic": "Forecasting Cash Flow" },
+                            { "id": "expenses", "topic": "Controlling Expenses" }
+                        ]},
+                        { "id": "investor_relations", "topic": "Investor Relations", "direction": "right", "children": [
+                            { "id": "communication", "topic": "Effective Communication" },
+                            { "id": "reporting", "topic": "Regular Reporting" }
+                        ]}
+                    ]},
+                    { "id": "competition", "topic": "Market Competition", "direction": "left", "children": [
+                        { "id": "competitors", "topic": "Established Competitors" },
+                        { "id": "differentiation", "topic": "Differentiation", "direction": "left", "children": [
+                            { "id": "unique_value", "topic": "Unique Value Proposition" },
+                            { "id": "branding", "topic": "Strong Branding" }
+                        ]},
+                        { "id": "pricing", "topic": "Pricing Wars", "direction": "left", "children": [
+                            { "id": "strategy", "topic": "Pricing Strategy" },
+                            { "id": "discounts", "topic": "Discount Management" }
+                        ]}
+                    ]},
+                    { "id": "scaling", "topic": "Scaling", "direction": "right", "children": [
+                        { "id": "operations", "topic": "Operational Challenges", "direction": "right", "children": [
+                            { "id": "efficiency", "topic": "Improving Efficiency" },
+                            { "id": "processes", "topic": "Streamlining Processes" }
+                        ]},
+                        { "id": "tech_infra", "topic": "Technology Infrastructure", "direction": "left", "children": [
+                            { "id": "scalability", "topic": "Scalability Issues" },
+                            { "id": "security", "topic": "Data Security" }
+                        ]},
+                        { "id": "quality", "topic": "Maintaining Quality", "direction": "left", "children": [
+                            { "id": "standards", "topic": "Quality Standards" },
+                            { "id": "customer_feedback", "topic": "Incorporating Feedback" }
+                        ]}
+                    ]},
+                    { "id": "talent", "topic": "Talent Acquisition", "direction": "left", "children": [
+                        { "id": "skills", "topic": "Finding Skilled Employees", "direction": "left", "children": [
+                            { "id": "job_ads", "topic": "Effective Job Advertisements" },
+                            { "id": "networks", "topic": "Leveraging Networks" }
+                        ]},
+                        { "id": "retention", "topic": "Retaining Employees", "direction": "left", "children": [
+                            { "id": "benefits", "topic": "Competitive Benefits" },
+                            { "id": "culture", "topic": "Positive Work Culture" }
+                        ]},
+                        { "id": "culture", "topic": "Cultural Fit", "direction": "right", "children": [
+                            { "id": "values", "topic": "Aligning Values" },
+                            { "id": "diversity", "topic": "Promoting Diversity" }
+                        ]}
+                    ]},
+                    { "id": "time", "topic": "Time Management", "direction": "right", "children": [
+                        { "id": "multiple_roles", "topic": "Wearing Multiple Hats" },
+                        { "id": "prioritization", "topic": "Prioritization", "direction": "left", "children": [
+                            { "id": "tools", "topic": "Time Management Tools" },
+                            { "id": "strategies", "topic": "Effective Strategies" }
+                        ]},
+                        { "id": "delegation", "topic": "Delegation", "direction": "left", "children": [
+                            { "id": "trust", "topic": "Building Trust" },
+                            { "id": "training", "topic": "Training for Delegation" }
+                        ]}
+                    ]},
+                    { "id": "marketing", "topic": "Marketing & Sales", "direction": "right", "children": [
+                        { "id": "brand", "topic": "Building Brand Awareness", "direction": "right", "children": [
+                            { "id": "social_media", "topic": "Social Media Strategies" },
+                            { "id": "content", "topic": "Content Marketing" }
+                        ]},
+                        { "id": "acquisition", "topic": "Customer Acquisition Costs", "direction": "left", "children": [
+                            { "id": "roi", "topic": "Measuring ROI" },
+                            { "id": "funnel", "topic": "Sales Funnel Optimization" }
+                        ]},
+                        { "id": "pipeline", "topic": "Building a Sales Pipeline", "direction": "left", "children": [
+                            { "id": "leads", "topic": "Generating Leads" },
+                            { "id": "conversion", "topic": "Improving Conversion Rates" }
+                        ]}
+                    ]},
+                    { "id": "legal", "topic": "Legal & Compliance", "direction": "left", "children": [
+                        { "id": "regulatory", "topic": "Regulatory Issues", "direction": "left", "children": [
+                            { "id": "compliance", "topic": "Ensuring Compliance" },
+                            { "id": "licenses", "topic": "Obtaining Licenses" }
+                        ]},
+                        { "id": "ip", "topic": "Intellectual Property", "direction": "left", "children": [
+                            { "id": "patents", "topic": "Filing Patents" },
+                            { "id": "trademarks", "topic": "Registering Trademarks" }
+                        ]},
+                        { "id": "taxation", "topic": "Taxation & Accounting", "direction": "right", "children": [
+                            { "id": "planning", "topic": "Tax Planning" },
+                            { "id": "compliance", "topic": "Tax Compliance" }
+                        ]}
+                    ]},
+                    { "id": "customer", "topic": "Customer Retention", "direction": "right", "children": [
+                        { "id": "loyalty", "topic": "Building Loyalty", "direction": "right", "children": [
+                            { "id": "rewards", "topic": "Loyalty Programs" },
+                            { "id": "engagement", "topic": "Customer Engagement" }
+                        ]},
+                        { "id": "service", "topic": "Customer Service", "direction": "left", "children": [
+                            { "id": "support", "topic": "Providing Support" },
+                            { "id": "feedback", "topic": "Handling Feedback" }
+                        ]},
+                        { "id": "expectations", "topic": "Meeting Expectations", "direction": "left", "children": [
+                            { "id": "quality", "topic": "Quality Assurance" },
+                            { "id": "communication", "topic": "Transparent Communication" }
+                        ]}
+                    ]}
+                ]
+            }
+        };
+
+        // Initialize the jsmind library when the window loads
+        window.onload = function () {
+            var options = {
+                container: 'jsmind_container',
+                editable: false,
+                theme: 'orange'
+            };
+
+            var jm = new jsmind(options);
+            jm.set_data(mindMapData);
+            jm.expand_all(); // Optional: expand all nodes by default
+        };
+    </script>
+</body>
+</html>

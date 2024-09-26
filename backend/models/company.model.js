@@ -3,6 +3,7 @@ const companySchema = new mongoose.Schema(
   {
     name: {
       type: String,
+      unique:true,
       required: true,
     },
     website: {
@@ -10,7 +11,7 @@ const companySchema = new mongoose.Schema(
     },
     location: {
       type: String,
-      required: true,
+      
     },
     logo: {
       type: String,
