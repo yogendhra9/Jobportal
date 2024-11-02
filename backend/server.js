@@ -16,11 +16,13 @@ app.get("/home");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const corsOptions = {
-  origin: "http://localhost:3002",
-  Credentials: true,
-};
-app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Replace with your frontend's origin
+    credentials: true,
+  })
+);
+
 //api's
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/company", companyRoute);

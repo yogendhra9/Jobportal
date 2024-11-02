@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 export const register = async (req, res) => {
   try {
     const { fullName, email, phoneNumber, password, role } = req.body;
+
     if (!fullName || !email || !phoneNumber || !password || !role) {
       return res
         .status(400)
@@ -42,6 +43,8 @@ export const login = async (req, res) => {
         .status(400)
         .json({ message: "Please fill in all fields.", success: false });
     }
+    console.log(req.body);
+    
     const lowerCaseEmail = email.toLowerCase();
     let user = await User.findOne({ email: lowerCaseEmail });
     if (!user) {
